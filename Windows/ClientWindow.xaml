@@ -1,0 +1,99 @@
+﻿<Window x:Class="ООО_Поломка_STO2.ClientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ООО_Поломка_STO2"
+        mc:Ignorable="d"
+        Title='ООО"Поломка" - Клиенты' Height="600" Width="1000" Loaded="Window_Loaded" Icon="/Resourses/service_logo.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Name="Header" Height="80"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Name="Footer" Height="60"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Image Source="/Resourses/service_logo.ico" Margin="10"></Image>
+            <TextBlock Margin="10" VerticalAlignment="Center" FontSize="32" FontWeight="DemiBold" Text='ООО"Поломка" - Клиенты'></TextBlock>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBlock VerticalAlignment="Center" Margin="10">Кол-во записей:</TextBlock>
+            <ComboBox Name="RecordsAmount_CMB" Width="60" Margin="0, 10" Background="White" SelectionChanged="RecordsAmount_CMB_SelectionChanged"/>
+
+            <TextBlock VerticalAlignment="Center" Margin="10">Пол:</TextBlock>
+            <ComboBox Name="Gender_CMB" Width="100" Margin="0, 10" Background="White" SelectionChanged="Gender_CMB_SelectionChanged" />
+
+            <TextBlock VerticalAlignment="Center" Margin="10">Сортировать по полю:</TextBlock>
+            <ComboBox Name="SortField_CMB" Width="120" Margin="0, 10" Background="White" SelectionChanged="Sort_CMB_SelectionChanged" />
+
+            <TextBlock VerticalAlignment="Center" Margin="10">По:</TextBlock>
+            <ComboBox Name="SortMethod_CMB" Width="120" Margin="0, 10" Background="White" SelectionChanged="Sort_CMB_SelectionChanged" />
+
+            <TextBlock VerticalAlignment="Center" Margin="10">День рождение в этом месяце:</TextBlock>
+            <CheckBox Name="BirtDayInThatMounth_Check" 
+                      Width="120" 
+                      Margin="0, 10" 
+                      Background="White" 
+                      VerticalAlignment="Center" 
+                      Checked="BirtDayInThatMounth_CheckChange" 
+                      Unchecked="BirtDayInThatMounth_CheckChange" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBlock VerticalAlignment="Center" Margin="10">Имя:</TextBlock>
+            <TextBox Name="FirstName_TXB" Width="120" Margin="0, 10" Background="White" TextChanged="Search_TXB_TextChanged"/>
+
+            <TextBlock VerticalAlignment="Center" Margin="10">Фамилия:</TextBlock>
+            <TextBox Name="Surname_TXB" Width="120" Margin="0, 10" Background="White" TextChanged="Search_TXB_TextChanged"/>
+
+            <TextBlock VerticalAlignment="Center" Margin="10">Отчество:</TextBlock>
+            <TextBox Name="Patronymic_TXB" Width="120" Margin="0, 10" Background="White" TextChanged="Search_TXB_TextChanged"/>
+
+            <TextBlock VerticalAlignment="Center" Margin="10">Email:</TextBlock>
+            <TextBox Name="EMail_TXB" Width="120" Margin="0, 10" Background="White" TextChanged="Search_TXB_TextChanged"/>
+
+            <TextBlock VerticalAlignment="Center" Margin="10">Номер телефона:</TextBlock>
+            <TextBox Name="PhoneNumber_TXB" Width="120" Margin="0, 10" Background="White" TextChanged="Search_TXB_TextChanged"/>
+        </StackPanel>
+
+        <ListView Grid.Row="4" Margin="10, 0" Name="Client_LV" SelectionChanged="Client_LV_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Идентификатор"       DisplayMemberBinding="{Binding Path=Id}"/>
+                    <GridViewColumn Header="Пол"                 DisplayMemberBinding="{Binding Path=Gender}"/>
+                    <GridViewColumn Header="Имя"                 DisplayMemberBinding="{Binding Path=FirstName}"/>
+                    <GridViewColumn Header="Фамилия"             DisplayMemberBinding="{Binding Path=LastName}"/>
+                    <GridViewColumn Header="Отчество"            DisplayMemberBinding="{Binding Path=Patronymic}"/>
+                    <GridViewColumn Header="Дата рождения"       DisplayMemberBinding="{Binding Path=BirthDate}"/>
+                    <GridViewColumn Header="Номер телефона"      DisplayMemberBinding="{Binding Path=PhoneNumber}"/>
+                    <GridViewColumn Header="E-mail"              DisplayMemberBinding="{Binding Path=Email}"/>
+                    <GridViewColumn Header="Дата регистрации"    DisplayMemberBinding="{Binding Path=RegisatrationDate}"/>
+                    <GridViewColumn Header="Последние посещение" DisplayMemberBinding="{Binding Path=LastVisit}"/>
+                    <GridViewColumn Header="Кол-во посещений"    DisplayMemberBinding="{Binding Path=VisitAmount}"/>
+                    <GridViewColumn Header="Теги"                DisplayMemberBinding="{Binding Path=Tags}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <TextBlock Name="PickedOutOfAll_TXT" 
+                   Grid.Row="5" 
+                   HorizontalAlignment="Left" 
+                   VerticalAlignment="Center" 
+                   Margin="10"
+                   FontSize="15"></TextBlock>
+
+        <Button Name="Delete_BTN" Grid.Row="5" HorizontalAlignment="Center" Margin="10" Click="Delete_BTN_Click">Удалить запись</Button>
+        
+        <StackPanel Grid.Row="5" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+            <Button Margin="10" Background="White" BorderThickness="0" Name="PrevPage" Click="PrevPage_Click">Предыдущая страница</Button>
+            <Button Margin="10" Background="White" BorderThickness="0" Name="NextPage" Click="NextPage_Click">Следующая страница</Button>
+        </StackPanel>
+
+    </Grid>
+</Window>
